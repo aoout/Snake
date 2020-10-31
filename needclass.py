@@ -5,12 +5,6 @@ from configure import *
 
 
 
-# 定义所需要的颜色
-black=(0,0,0)
-white=(255,255,255)
-red=(255,0,0)
-cyan=(0,128,128)
-darkgray=(40,40,40)
 
 class Cell:
     "单元类，一个一个的小方格。"
@@ -32,9 +26,9 @@ class Field:
             self.Cells.append(temp)
     def draw(self,screen):
         for y in range(0,Field.ylimit,Cell.size):
-            pygame.draw.line(screen,darkgray,(0,y),(Field.xlimit,y))
+            pygame.draw.line(screen,lines_color,(0,y),(Field.xlimit,y))
         for x in range(0,Field.xlimit,Cell.size):
-            pygame.draw.line(screen,darkgray,(x,0),(x,Field.ylimit))
+            pygame.draw.line(screen,lines_color,(x,0),(x,Field.ylimit))
 
 class Apple:
     "苹果类，占地一个小方格。"
@@ -46,7 +40,7 @@ class Apple:
         x=self.pos.coorx*Cell.size
         y=self.pos.coory*Cell.size
         rect = pygame.Rect(x, y, Cell.size, Cell.size)
-        pygame.draw.rect(screen, red, rect)
+        pygame.draw.rect(screen, apple_color, rect)
 
 class Snake:
     "蛇类，有draw(),crawl(),eat()等方法"
@@ -64,7 +58,7 @@ class Snake:
             x=_pos.coorx*Cell.size
             y=_pos.coory*Cell.size
             rect = pygame.Rect(x, y, Cell.size, Cell.size)
-            pygame.draw.rect(screen,cyan,rect)
+            pygame.draw.rect(screen,snake_color,rect)
     def crawl(self,field):
         dir=self.direction
         coorx=self.head.coorx

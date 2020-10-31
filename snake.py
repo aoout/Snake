@@ -3,6 +3,7 @@ import pygame
 import random 
 import sys
 from pygame.locals import *
+from configure import *
 
 def main():
     global snakespeedclock, screen
@@ -54,7 +55,7 @@ def runGame():
                         coincide=True
         else:
             del snake.pos[-1]
-        screen.fill(black)
+        screen.fill(backgound_color)
         field.draw(screen)
         snake.draw(screen)
         apple.draw(screen)
