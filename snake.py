@@ -33,17 +33,17 @@ def runGame():
             if event.type==QUIT:
                 terminate()
             elif event.type==KEYDOWN:
-                if event.key==K_RIGHT and snake.direction!= 'left':
+                if event.key==K_RIGHT or event.key==K_d and snake.direction!= 'left':
                     snake.direction='right'
-                elif event.key==K_LEFT and snake.direction!= 'right':
+                elif event.key==K_LEFT or event.key==K_a and snake.direction!= 'right':
                     snake.direction='left'
-                elif event.key==K_DOWN and snake.direction!= 'up':
+                elif event.key==K_DOWN or event.key==K_s and snake.direction!= 'up':
                     snake.direction='down'
-                elif event.key==K_UP and snake.direction!= 'down':
+                elif event.key==K_UP or event.key==K_w and snake.direction!= 'down':
                     snake.direction='up'
                 elif event.key==K_ESCAPE:
                     terminate()
-                elif event.key==K_SPACE:
+                elif event.key==K_SPACE or event.key==K_p :
                     pause()
         if snake.crawl(field)=='collide':
             return
@@ -75,7 +75,7 @@ def pause():
             if event.type==QUIT:
                 terminate()
             elif event.type==KEYDOWN:
-                if event.key==K_SPACE:
+                if event.key==K_SPACE or event.key==K_p:
                     return
                 if event.key==K_ESCAPE:
                     terminate()
