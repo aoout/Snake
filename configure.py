@@ -27,6 +27,7 @@ if default_setting:
     lines_color=(40,40,40)
     backgound_color=(0,0,0)
     apple_color=(255,0,0)
+    strange_apple=False
 else:
     cell_size=config.getint("size","cell_size")
     cell_num_x=config.getint("size","cell_num_x")
@@ -45,4 +46,8 @@ else:
     backgound_color=getcolor(_backgound_color)
     _apple_color=config.get("color","apple_color")
     apple_color=getcolor(_apple_color)
+    strange_apple=config.getboolean("other","strange_apple")
+    if strange_apple:
+        _strange_apple_color=config.get("other","strange_apple_color")
+        strange_apple_color=getcolor(_strange_apple_color)
 

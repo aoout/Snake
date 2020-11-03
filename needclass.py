@@ -33,13 +33,21 @@ class Apple:
     def __init__(self,field):
         coorx=randint(0,Field.coorxlimit-1)
         coory=randint(0,Field.coorylimit-1)
+        self.strange=0
+        if strange_apple:
+            stap=randint(0,8)
+            if stap==4:
+                strange=randint(1,6)
+                self.strange=strange
         self.pos=field.Cells[coorx][coory]
     def draw(self,screen):
         x=self.pos.coorx*Cell.size
         y=self.pos.coory*Cell.size
         rect = pygame.Rect(x, y, Cell.size, Cell.size)
-        pygame.draw.rect(screen, apple_color, rect)
-
+        if not self.strange:
+            pygame.draw.rect(screen, apple_color, rect)
+        else:
+            pygame.draw.rect(screen, strange_apple_color, rect)
 class Snake:
     "蛇类，有draw(),crawl(),eat()等方法"
     startspeed=snake_start_speed
@@ -87,7 +95,9 @@ class Snake:
         coorx=self.head.coorx
         coory=self.head.coory
         if coorx==apple.pos.coorx and coory==apple.pos.coory:
-            if self.speed<snake_speed_max:
+            if apple.strange:
+                self.speed-=snake_speed_addonetime*apple.strange
+            elif self.speed<snake_speed_max:
                 self.speed+=Snake.speedadd
             return True
         return False
