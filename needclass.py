@@ -55,7 +55,7 @@ class Snake:
         self.speed=Snake.startspeed
     def draw(self,screen):
         for _pos in self.pos:
-            x=_pos.coorx*Cell.size
+            x=_pos.coorx*Cell.size 
             y=_pos.coory*Cell.size
             rect = pygame.Rect(x, y, Cell.size, Cell.size)
             edge_rect = pygame.Rect(x + 4, y + 4, Cell.size - 8, Cell.size - 8)
