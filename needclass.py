@@ -58,7 +58,10 @@ class Snake:
             x=_pos.coorx*Cell.size
             y=_pos.coory*Cell.size
             rect = pygame.Rect(x, y, Cell.size, Cell.size)
+            edge_rect = pygame.Rect(x + 4, y + 4, Cell.size - 8, Cell.size - 8)
             pygame.draw.rect(screen,snake_color,rect)
+            pygame.draw.rect(screen,snake_edge_color,rect)
+
     def crawl(self,field):
         dir=self.direction
         coorx=self.head.coorx
@@ -84,6 +87,7 @@ class Snake:
         coorx=self.head.coorx
         coory=self.head.coory
         if coorx==apple.pos.coorx and coory==apple.pos.coory:
-            self.speed+=Snake.speedadd
+            if self.speed<snake_speed_max:
+                self.speed+=Snake.speedadd
             return True
         return False

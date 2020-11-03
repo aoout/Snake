@@ -11,6 +11,7 @@ cell_num_y=config.getint("size","cell_num_y")
 snake_length=config.getint("size","snake_length")
 snake_start_speed=config.getint("speed","snake_start_speed")
 snake_speed_addonetime=config.getfloat("speed","snake_speed_addonetime")
+snake_speed_max=config.getfloat("speed","snake_speed_max")
 
 
 def getcolor(str):
@@ -20,6 +21,8 @@ def getcolor(str):
 
 _snake_color=config.get("color","snake_color")
 snake_color=getcolor(_snake_color)
+_snake_edge_color=config.get("color","snake_edge_color")
+snake_edge_color=getcolor(_snake_edge_color)
 _lines_color=config.get("color","lines_color")
 lines_color=getcolor(_lines_color)
 _backgound_color=config.get("color","backgound_color")
