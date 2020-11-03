@@ -9,7 +9,10 @@ def main():
     global snakespeedclock, screen
     pygame.init()
     snakespeedclock = pygame.time.Clock()
-    screen=pygame.display.set_mode((Field.xlimit,Field.ylimit))
+    if full_screen:
+        screen=pygame.display.set_mode((Field.xlimit,Field.ylimit),FULLSCREEN)
+    else:
+        screen=pygame.display.set_mode((Field.xlimit,Field.ylimit))
     pygame.display.set_caption('Snake')
     while True:
         runGame()
@@ -24,9 +27,6 @@ def runGame():
         for _pos in snake.pos:
             if _pos.coorx==apple.pos.coorx and _pos.coory==apple.pos.coory:
                 coincide=True
-        
-
-
     
     while True:
         for event in pygame.event.get():
@@ -64,6 +64,7 @@ def runGame():
         pygame.display.update()
         snakespeedclock.tick(snake.speed)
 
+
 def terminate():
     pygame.quit()
     sys.exit()
@@ -76,6 +77,8 @@ def pause():
             elif event.type==KEYDOWN:
                 if event.key==K_SPACE:
                     return
+                if event.key==K_ESCAPE:
+                    terminate()
 
 if __name__ =='__main__':
     try:

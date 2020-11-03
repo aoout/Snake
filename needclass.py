@@ -65,10 +65,11 @@ class Snake:
         for _pos in self.pos:
             x=_pos.coorx*Cell.size 
             y=_pos.coory*Cell.size
-            rect = pygame.Rect(x, y, Cell.size, Cell.size)
-            edge_rect = pygame.Rect(x + 4, y + 4, Cell.size - 8, Cell.size - 8)
+            edge_rect = pygame.Rect(x, y, Cell.size, Cell.size)
+            rect = pygame.Rect(x+Cell.size/6, y+Cell.size/6, Cell.size*2/3, Cell.size*2/3)
+            pygame.draw.rect(screen,snake_edge_color,edge_rect)
             pygame.draw.rect(screen,snake_color,rect)
-            pygame.draw.rect(screen,snake_edge_color,rect)
+            
 
     def crawl(self,field):
         dir=self.direction
@@ -83,11 +84,19 @@ class Snake:
         elif dir=='up':
             coory-=1
         if coorx==-1 or coory==-1 or coorx==Field.coorxlimit or coory==Field.coorylimit:
-            return 'collide'
+            if not no_wall:
+                return 'collide'
         for _pos in self.pos[1:]:
             if coorx==_pos.coorx and coory==_pos.coory:
-                return 'collide'
-        self.head=field.Cells[coorx][coory]
+                if not no_wall:
+                    return 'collide'
+        try:
+            self.head=field.Cells[coorx][coory]
+        except  IndexError:
+            if coorx==Field.coorxlimit:
+                self.head=field.Cells[0][coory]
+            else:
+                self.head=field.Cells[coorx][0]
         self.pos.insert(0,self.head)
         return 'none'
         

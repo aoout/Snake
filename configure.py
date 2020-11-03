@@ -23,11 +23,13 @@ if default_setting:
     snake_speed_addonetime=0.6
     snake_speed_max=22
     snake_color=(0,128,128)
-    snake_edge_color=(0,128,128)
+    snake_edge_color=(0,0,128)
     lines_color=(40,40,40)
     backgound_color=(0,0,0)
     apple_color=(255,0,0)
     strange_apple=False
+    full_screen=False
+    no_wall=False
 else:
     cell_size=config.getint("size","cell_size")
     cell_num_x=config.getint("size","cell_num_x")
@@ -50,4 +52,8 @@ else:
     if strange_apple:
         _strange_apple_color=config.get("other","strange_apple_color")
         strange_apple_color=getcolor(_strange_apple_color)
-
+    full_screen=config.getboolean("other","full_screen")
+    if full_screen:
+        _curtain_color=config.get("other",'curtain_color')
+        curtain=getcolor(_curtain_color)
+    no_wall=config.getboolean("other","no_wall")
