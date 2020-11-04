@@ -22,11 +22,14 @@ class Field:
         for coorx in range(0,Field.coorxlimit):
             for coory in range(0,Field.coorylimit):
                 self.Cells[coorx][coory]=Cell(coorx,coory)
-    def draw(self,screen):
+    def draw(self,screen,snake):
         for y in range(0,Field.ylimit,Cell.size):
             pygame.draw.line(screen,lines_color,(0,y),(Field.xlimit,y))
         for x in range(0,Field.xlimit,Cell.size):
             pygame.draw.line(screen,lines_color,(x,0),(x,Field.ylimit))
+        Font=pygame.font.SysFont('宋体',20)
+        text=Font.render('score:'+str(snake.score),1,(0,0,255))
+        screen.blit(text,(Field.xlimit*9/10,0))
 
 class Apple:
     "苹果类，占地一个小方格。"
@@ -61,6 +64,7 @@ class Snake:
         self.head=self.pos[0]
         self.direction='right'
         self.speed=Snake.startspeed
+        self.score=0
     def draw(self,screen):
         for _pos in self.pos:
             x=_pos.coorx*Cell.size 
@@ -108,5 +112,6 @@ class Snake:
                 self.speed-=snake_speed_addonetime*apple.strange
             elif self.speed<snake_speed_max:
                 self.speed+=Snake.speedadd
+            self.score+=1
             return True
         return False

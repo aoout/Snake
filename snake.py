@@ -58,7 +58,7 @@ def runGame():
         else:
             del snake.pos[-1]
         screen.fill(backgound_color)
-        field.draw(screen)
+        field.draw(screen,snake)
         snake.draw(screen)
         apple.draw(screen)
         pygame.display.update()
