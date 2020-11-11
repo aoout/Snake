@@ -27,7 +27,7 @@ class Field:
             pygame.draw.line(screen,lines_color,(0,y),(Field.xlimit,y))
         for x in range(0,Field.xlimit,Cell.size):
             pygame.draw.line(screen,lines_color,(x,0),(x,Field.ylimit))
-        Font=pygame.font.SysFont('宋体',20)
+        Font=pygame.font.Font('./simsun.ttc',20)
         text=Font.render('score:'+str(snake.score),1,(0,0,255))
         screen.blit(text,(Field.xlimit*9/10,0))
 
