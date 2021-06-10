@@ -17,44 +17,44 @@ def main():
     while True:
         runGame()
 
-def runGame():
-    field=Field()
-    snake=Snake(field)
-    coincide=True
+def addapple(field,snake):
+    coincide = True
     while coincide:
         apple=Apple(field)
         coincide=False
         for _pos in snake.pos:
             if _pos.coorx==apple.pos.coorx and _pos.coory==apple.pos.coory:
                 coincide=True
+        return apple
+
+def runGame():
+    field=Field()
+    snake=Snake(field)
+    apple = addapple(field,snake)
+
     
     while True:
         for event in pygame.event.get():
             if event.type==QUIT:
                 terminate()
             elif event.type==KEYDOWN:
-                if event.key==K_RIGHT or event.key==K_d and snake.direction!= 'left':
+                _dir = snake.direction
+                if event.key in [K_RIGHT ,K_d] and _dir!= 'left':
                     snake.direction='right'
-                elif event.key==K_LEFT or event.key==K_a and snake.direction!= 'right':
+                elif event.key in [K_LEFT ,K_a] and _dir!= 'right':
                     snake.direction='left'
-                elif event.key==K_DOWN or event.key==K_s and snake.direction!= 'up':
+                elif event.key in [K_DOWN ,K_s] and _dir!= 'up':
                     snake.direction='down'
-                elif event.key==K_UP or event.key==K_w and snake.direction!= 'down':
+                elif event.key in [K_UP,K_w] and _dir!= 'down':
                     snake.direction='up'
                 elif event.key==K_ESCAPE:
                     terminate()
-                elif event.key==K_SPACE or event.key==K_p :
+                elif event.key in [K_SPACE ,K_p] :
                     pause()
         if snake.crawl(field)=='collide':
             return
         if snake.eat(apple):
-            coincide=True
-            while coincide:
-                apple=Apple(field)
-                coincide=False
-                for _pos in snake.pos:
-                    if _pos.coorx==apple.pos.coorx and _pos.coory==apple.pos.coory:
-                        coincide=True
+            apple = addapple(field,snake)
         else:
             del snake.pos[-1]
         screen.fill(backgound_color)
